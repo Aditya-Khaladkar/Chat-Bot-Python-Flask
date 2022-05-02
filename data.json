@@ -1,0 +1,131 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day",
+        "Hey",
+        "Hola",
+        "Namaste",
+        "yo"
+      ],
+      "responses": [
+        "Hello, my name is Trippy! How may I help you ?",
+        "Hey! Nice to meet you",
+        "Hi there, how can I help?",
+        "Hello! How may I be of service today"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "identity",
+      "patterns": [
+        "Who are you",
+        "what are you"
+      ],
+      "responses": [
+        "I am Trippy, a Deep-Learning chatbot"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Good bye"
+      ],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ],
+      "context": ""
+    },
+    {
+      "tag": "activity",
+      "patterns": [
+        "what are you doing",
+        "what are you upto",
+        "Whats'up"
+      ],
+      "responses": [
+        "Talking to you, of course!"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "That's helpful"
+      ],
+      "responses": [
+        "Happy to help!",
+        "Any time!",
+        "My pleasure",
+        "Come back soon!",
+        "Until next time"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "noanswer",
+      "patterns": [
+        ""
+      ],
+      "responses": [
+        "Sorry, can't understand you",
+        "Please give me more info",
+        "Not sure I understand"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "location",
+      "patterns": [
+        "I want to book a Hotel",
+        "Book hotel",
+        "Hotel Booking",
+        "Hotel"
+      ],
+      "responses": [
+        "Sure! Where is the hotel located?",
+        "Enter hotel location",
+        "Please specify the city"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "city",
+      "patterns": [
+        "Pune",
+        "PNQ",
+        "Bengaluru",
+        "mumbai",
+        "bom",
+        "bombay"
+      ],
+      "responses": [
+        "First tell me your check in date yyyy-mm-dd format !"
+      ],
+      "context": ""
+    },
+    {
+      "tag": "no",
+      "patterns": [
+        "1",
+        "2"
+      ],
+      "responses": [
+        "..."
+      ],
+      "context": ""
+    }
+  ]
+}
