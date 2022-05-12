@@ -2,10 +2,11 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 import json
-import nltk
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, Flatten, GlobalMaxPooling1D
 from tensorflow.keras.models import Model
+
+import os
 
 with open('data.json') as database:
     data1 = json.load(database)
@@ -17,8 +18,10 @@ for intent in data1['intents']:
     for lines in intent['patterns']:
         inputs.append(lines)
         tags.append(intent['tag'])
+
 data = pd.DataFrame({"input patterns": inputs, 'tags': tags})
 data = data.sample(frac=1)
+
 import string
 
 data['input patterns'] = data['input patterns'].apply(
@@ -36,6 +39,7 @@ x_train = pad_sequences(train)
 from sklearn.preprocessing import LabelEncoder
 
 le = LabelEncoder()
+
 y_train = le.fit_transform(data['tags'])
 input_shape = x_train.shape[1]
 print(input_shape)
@@ -62,7 +66,7 @@ import requests
 import string
 from tensorflow.keras.preprocessing.text import Tokenizer
 
-c = " "
+c = ""
 hotelId = 0
 
 url = "https://booking-com.p.rapidapi.com/v1/hotels/search"
@@ -98,34 +102,52 @@ def getResponse(msg):
                        "children_ages": "5,0", "categories_filter_ids": "class::2,class::4,free_cancellation::1",
                        "include_adjacency": "true"
                        }
+
         global data
-        if response_tag == 'city':
+        if response_tag == 'city':#CITY INPUT
             c = msg
             if (c.lower()) == 'pune' or (c.lower()) == 'pnq':
                 querystring.update({"dest_id": "-2108361"})
+                c = "Pune"
+            if (c.lower()) == 'mumbai' or (c.lower()) == 'bom' or (c.lower()) == 'bombay':
+                querystring.update({"dest_id": "-2092174"})
+                c = "Mumbai"
+            if (c.lower()) == 'banglore' or (c.lower()) == 'blr' or (c.lower()) == 'bengaluru':
+                querystring.update({"dest_id": "-2090174"})
+                c = "Banglore"
+            if (c.lower()) == 'delhi' or (c.lower()) == 'del':
+                querystring.update({"dest_id": "-2106102"})
+                c = "Delhi"
 
             response = requests.request("GET", url, headers=headers, params=querystring)
-
-
             data = response.json()
-            print(type(data))
 
-            k = f"---------- Top 5 hotels in {c} ----------\n"
+            hotellist = f"<center><u>Top 5 hotels in {c}</u></center><br>"
 
             for i in range(5):
-                hotel = data["result"][i]["hotel_name"]
+                hotel = str(i+1) + " - " + data["result"][i]["hotel_name"] + "<br>"
                 hotellist += hotel
-                print(i + 1, "", hotel)
-                res = hotellist
-        if response_tag == "no":
+
+            res = hotellist
+        if response_tag == "no": #NUMBER INPUT
             url1 = "https://booking-com.p.rapidapi.com/v1/hotels/facilities"
 
-            if msg == "1":
-                hotelId = data["result"][0]["hotel_id"]
+            if msg == "1" or msg == "2" or msg == "3" or msg == "4" or msg == "5":
+                index = int(msg) -1
+                hotelId = data["result"][index]["hotel_id"]
                 querystring1 = {"locale": "en-gb", "hotel_id": hotelId}
-                print(hotelId)
                 response = requests.request("GET", url1, headers=headers, params=querystring1)
-                print(response.text)
+
+                facilities = "<u><i><center>Facilities</center></u></i> <br>"
+                data1 = response.json()
+                for i in range(15):
+                    facilities += "-> " + data1[i]["facility_name"] + "<br>"
+
+                hotelURL = """<a href = " """ + data["result"][index]["url"] + """ "> """  + data["result"][index]["hotel_name"] + "</a><br>"
+                res = facilities + "<br> Book Now - <br>" + hotelURL
+
+            else:
+                res = "Invalid Input."
 
         return res
 
@@ -137,7 +159,7 @@ def chatbot_response(msg):
     result = getResponse(msg)
     return result
 
-
+#----------------------------------------#
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
