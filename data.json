@@ -4,7 +4,6 @@
       "tag": "greeting",
       "patterns": [
         "Hi",
-        "How are you",
         "Is anyone there?",
         "Hello",
         "Good day",
@@ -92,7 +91,8 @@
         "I want to book a Hotel",
         "Book hotel",
         "Hotel Booking",
-        "Hotel"
+        "Hotel",
+        "Book"
       ],
       "responses": [
         "Sure! Where is the hotel located?",
@@ -109,10 +109,14 @@
         "Bengaluru",
         "mumbai",
         "bom",
-        "bombay"
+        "bombay",
+        "Delhi",
+        "del",
+        "Banglore",
+        "blr"
       ],
       "responses": [
-        "First tell me your check in date yyyy-mm-dd format !"
+        "..."
       ],
       "context": ""
     },
@@ -120,7 +124,14 @@
       "tag": "no",
       "patterns": [
         "1",
-        "2"
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
       ],
       "responses": [
         "..."
