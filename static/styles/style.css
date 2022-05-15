@@ -1,8 +1,5 @@
 :root {
- height: 200px;
-  width: 50%;
-    background-color: #00a884;
-
+    background: linear-gradient(#00a884 50%, #e1e1df 50%);
     --msger-bg: #fff;
     --border: 2px solid #ddd;
     --left-msg-bg: #ece5dd;
@@ -51,8 +48,9 @@
     /* display: flex; */
     font-size: medium;
     justify-content: space-between;
-    padding: 10px;
-    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    text-align: left;
     border-bottom: var(--border);
     background: #eee;
     color: #666;
@@ -83,7 +81,7 @@
     width: 50px;
     height: 50px;
     margin-right: 10px;
-    background: #ddd;
+    background: #128c7e;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
