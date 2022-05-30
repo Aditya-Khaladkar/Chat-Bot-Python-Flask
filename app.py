@@ -6,8 +6,6 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.layers import Input, Embedding, LSTM, Dense, Flatten, GlobalMaxPooling1D
 from tensorflow.keras.models import Model
 
-import os
-
 with open('data.json') as database:
     data1 = json.load(database)
 tags = []
